@@ -1,0 +1,67 @@
+.game-panel {
+  width: 100%;
+  height: 100%;
+  padding: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  .title {
+    font-weight: 400;
+    font-size: 4em;
+  }
+
+  &.activeBlur {
+    filter: blur(5px);
+  }
+  .container {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    .card {
+      position: relative;
+      background-color: #ddd;
+      width: 22%;
+      height: 22%;
+      border-radius: 10px;
+      cursor: pointer;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        height: 60%;
+      }
+    }
+  }
+  .statistics {
+    p {
+      margin: 1% 0;
+      font-size: 1.5em;
+    }
+    .restart {
+      display: none;
+      font-family: 'Roboto', sans-serif;
+      width: 20%;
+      padding: 1%;
+      font-size: 24px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+      border-radius: 10px;
+      transition: 0.5s linear;
+      &:hover {
+        background-color: white;
+        color: #4c4b48;
+        cursor: pointer;
+      }
+      &.active {
+        display: inline;
+      }
+    }
+  }
+}
