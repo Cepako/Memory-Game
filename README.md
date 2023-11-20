@@ -3,7 +3,7 @@
 Memory Game is a simple card game where players have to find pairs of identical cards. The game consists of 16 cards, divided into 8 pairs. The cards are randomly placed on the board face down. Players flip two cards. If the cards form a pair, they are revealed.
 If the cards do not form a pair, they are turned face down again. The game ends when all cards are revealed.
 
-![image](https://github.com/Cepako/Memory-Game/assets/131913675/d05794b4-157b-4158-be84-0736ddbadc3a)
+![image](https://github.com/Cepako/Memory-Game/assets/131913675/6927e0e9-cf45-4d52-9a2e-e1d929f70fc3)
 
 Features
 
