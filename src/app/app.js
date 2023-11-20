@@ -50,10 +50,11 @@ function stopTime() {
 
 let firstFlipped,
   secondFlipped,
-  stopCounter = 0;
+  stopCounter = 0,
+  fixFlag = true;
 
 function gameFunc(card) {
-  if (cardFlipped === 0) {
+  if (cardFlipped === 0 && fixFlag) {
     card.classList.add('flipped');
     cardFlipped++;
     firstFlipped = card;
@@ -62,7 +63,9 @@ function gameFunc(card) {
       ++time;
       startTime();
     }
-  } else if (cardFlipped === 1) {
+    fixFlag = !fixFlag;
+    moves++;
+  } else if (cardFlipped === 1 && !fixFlag) {
     card.classList.add('flipped');
     cardFlipped++;
     secondFlipped = card;
@@ -73,6 +76,8 @@ function gameFunc(card) {
       firstFlipped.style.pointerEvents = 'none';
       secondFlipped.style.pointerEvents = 'none';
       stopCounter++;
+      fixFlag = !fixFlag;
+      moves++;
     } else {
       secondFlipped.style.pointerEvents = 'none';
       setTimeout(() => {
@@ -80,11 +85,12 @@ function gameFunc(card) {
         firstFlipped.style.pointerEvents = 'auto';
         secondFlipped.classList.remove('flipped');
         secondFlipped.style.pointerEvents = 'auto';
+        fixFlag = !fixFlag;
       }, 600);
+      moves++;
     }
     cardFlipped = 0;
   }
-  moves++;
   movesField.textContent = `${moves} moves`;
 
   if (stopCounter === cards.length / 2) {
