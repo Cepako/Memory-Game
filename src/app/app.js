@@ -1,9 +1,12 @@
-const cardBacks = document.querySelectorAll('.card__back img');
-const cards = document.querySelectorAll('.card');
-const winnerText = document.querySelector('.popup h1'),
+const cardBacks = document.querySelectorAll('.card__back img'),
+  cards = document.querySelectorAll('.card'),
+  winnerText = document.querySelector('.popup h1'),
   popup = document.querySelector('.popup'),
   gamePanel = document.querySelector('.game-panel'),
-  restartButton = document.querySelector('.restart');
+  restartButton = document.querySelector('.restart'),
+  xBtn = document.querySelector('.fa-xmark'),
+  movesField = document.querySelector('.moves'),
+  timeField = document.querySelector('.time');
 
 let fruitsArray = [
   'apple.png',
@@ -27,31 +30,29 @@ let fruitsArrayCopy = fruitsArray.map((x) => x);
 
 let moves = 0,
   time = 0,
-  cardFlipped = 0;
-
-const movesField = document.querySelector('.moves'),
-  timeField = document.querySelector('.time');
+  cardFlipped = 0,
+  intervalId,
+  firstFlipped,
+  secondFlipped,
+  stopCounter = 0,
+  fixFlag = true;
 
 function randomCard() {
   const randomIndex = Math.floor(Math.random() * fruitsArray.length);
   const fruit = fruitsArray.splice(randomIndex, 1);
   return fruit;
 }
-let intervalId;
+
 function startTime() {
   intervalId = setInterval(() => {
     timeField.textContent = `Time: ${time} sec`;
     time++;
   }, 1000);
 }
+
 function stopTime() {
   clearInterval(intervalId);
 }
-
-let firstFlipped,
-  secondFlipped,
-  stopCounter = 0,
-  fixFlag = true;
 
 function gameFunc(card) {
   if (cardFlipped === 0 && fixFlag) {
@@ -77,7 +78,6 @@ function gameFunc(card) {
       secondFlipped.style.pointerEvents = 'none';
       stopCounter++;
       fixFlag = !fixFlag;
-      moves++;
     } else {
       secondFlipped.style.pointerEvents = 'none';
       setTimeout(() => {
@@ -87,8 +87,9 @@ function gameFunc(card) {
         secondFlipped.style.pointerEvents = 'auto';
         fixFlag = !fixFlag;
       }, 600);
-      moves++;
     }
+
+    moves++;
     cardFlipped = 0;
   }
   movesField.textContent = `${moves} moves`;
@@ -112,16 +113,7 @@ function initGame() {
     card.addEventListener('click', () => gameFunc(card));
   });
 }
-
-initGame();
-
-const xBtn = document.querySelector('.fa-xmark');
-xBtn.addEventListener('click', () => {
-  popup.classList.remove('activePopup');
-  gamePanel.classList.remove('activeBlur');
-});
-
-restartButton.addEventListener('click', () => {
+function reset() {
   restartButton.classList.remove('active');
   moves = 0;
   time = 0;
@@ -137,4 +129,15 @@ restartButton.addEventListener('click', () => {
   });
   fruitsArray = fruitsArrayCopy.map((x) => x);
   randomCards();
-});
+}
+
+function closePopup() {
+  popup.classList.remove('activePopup');
+  gamePanel.classList.remove('activeBlur');
+}
+
+xBtn.addEventListener('click', closePopup);
+
+restartButton.addEventListener('click', reset);
+
+initGame();
