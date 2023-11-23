@@ -81,12 +81,16 @@ function gameFunc(card) {
     } else {
       secondFlipped.style.pointerEvents = 'none';
       setTimeout(() => {
-        firstFlipped.classList.remove('flipped');
+        firstFlipped.classList.add('shake');
+        secondFlipped.classList.add('shake');
+      }, 500);
+      setTimeout(() => {
+        firstFlipped.classList.remove('flipped', 'shake');
         firstFlipped.style.pointerEvents = 'auto';
-        secondFlipped.classList.remove('flipped');
+        secondFlipped.classList.remove('flipped', 'shake');
         secondFlipped.style.pointerEvents = 'auto';
         fixFlag = !fixFlag;
-      }, 600);
+      }, 1100);
     }
 
     moves++;
