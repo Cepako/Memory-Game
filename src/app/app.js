@@ -100,6 +100,7 @@ function gameFunc(card) {
     popup.classList.add('activePopup');
     gamePanel.classList.add('activeBlur');
     restartButton.classList.add('active');
+    timeField.textContent = `Time: ${time} sec`;
   }
 }
 function randomCards() {
